@@ -4,35 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+        <title>Document</title>
     <link rel="stylesheet" href="./Main.css">
-
 </head>
 
 <body>
     <div id="appBar">
+        <div id="rightHeadline">
+            בחזרה לעתיד
+            <img src="./resource/flight-removebg-preview.png" >
+            <img src="./resource/ict10.png"  id="ictPng">
+        </div>
         <div id="greetingContainer">
             <h1 id="websiteGreeting">שלום פלוני אלמוני</h1>
             <p id="lastEnterd">
                 הכניסה האחרונה שלך 11:00
             </p>
         </div>
-        <div id="rightHeadline">
-            <p id="title">בחזרה לעתיד</p>
-            <img src="./resource/מעוף-removebg-preview.png">
-            <img src="./resource/תקשוב-removebg-preview.png">
-        </div>
     </div>
+   
     <div id="contentContainer">
-        <div class="roundedBorders" id="itemsContainer">
-            <div id="alltems">
-                <h1 class="inPageHeadlines">:כל הפריטים</h1>
-            </div>
-            <div id="specificItems">
-                <h1 class="inPageHeadlines">:פריטים ספציפיים</h1>
-            </div>
-        </div>
-        <div class="roundedBorders" id="buttons-container">
+        <div id="buttons-container">
             <button class="blueButton inPageHeadlines">
                 חייזרים
             </button>
@@ -45,8 +37,17 @@
             <button class="blueButton inPageHeadlines">
                 מלחמה
             </button>
-            <button class="blueButton">מרחב גלקטי</button>
+            <button class="blueButton" id="galactic">מרחב גלקטי</button>
         </div>
+        <div id="itemsContainer">
+            <div id="alltems">
+                <h1 class="inPageHeadlines">כל הפריטים:</h1>
+            </div>
+            <div id="specificItems">
+                <h1 class="inPageHeadlines">פריטים ספציפיים:</h1>
+            </div>
+        </div>
+       
     </div>
 </body>
 </html>

@@ -8,41 +8,33 @@ body {
     border-color: rgb(0, 35, 100);
     border-width: 0.3vw;
     position: absolute;
-    justify-self: center;
     background: rgb(174, 221, 231);
-
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
 }
 
 #lastEnterd {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 1.07vw;
     margin-top: 0;
-
 }
 
 #appBar {
-    height: 110px;
+    height: 10%;
     border-style: solid;
     border-color: rgb(0, 35, 100);
-    border-radius: 20px;
-    margin-top: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
+    border-radius: 1.04vw;
     background: #dffcff;
-    display: inline-block;
-    justify-items: end;
-    text-align: start;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 95.16%;
+    /* justify-items: end; */
+    width: 94%;
 }
 
 .inPageHeadlines {
-    margin: 5px;
+    margin: 0.25vw;
     font-size: 1.9vw;
-
 }
 
 #greetingContainer {
@@ -52,31 +44,33 @@ body {
 
 #rightHeadline {
     display: inline-block;
+    word-spacing: -0.4vw;
+    line-height: 100%;
     float: right;
-}
-
-.roundedBorders {
-    border-radius: 40px;
-    border-style: solid;
-    border-color: rgb(0, 35, 100);
+    margin: 0;
+    background: linear-gradient(180deg, #1726FF 0%, #060057 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 5.5vw;
+    font-weight: 700;
+    -webkit-text-stroke-width: 0.3vh;
+    -webkit-text-stroke-color: #71ceef;
+    filter: drop-shadow(0.1vw 0.1vw 0.1vw #333);
 }
 
 #contentContainer {
-    align-items: end;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    direction: rtl;
+    justify-content: space-evenly;
+    display: flex;
     height: 82vh;
     width: 95vw;
-    margin-left: 2%;
-    display: flex;
-    justify-content: left;
 }
 
 #specificItems {
     border-style: solid;
     border-color: rgb(0, 35, 100);
     background-color: #ffffff;
-    height: 20vh;
+    height: 22vh;
     width: 54vw;
 }
 
@@ -84,26 +78,24 @@ body {
     border-style: solid;
     border-color: rgb(0, 35, 100);
     background-color: #ffffff;
-    margin-bottom: 10px;
     width: 54vw;
-    height: 50vh;
+    height: 51vh;
 }
 
 #itemsContainer {
     border-radius: 15%;
     border-style: solid;
     border-color: rgb(0, 35, 100);
-    width: 90vw;
+    width: 70vw;
     height: 81vh;
     flex-direction: column;
     align-content: center;
     background: rgb(243, 243, 243);
     text-align: center;
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    margin-right: 2%;
-    margin-bottom: 2vh;
 }
 
 img {
@@ -112,48 +104,43 @@ img {
 
 #websiteGreeting {
     font-weight: 500;
-    margin-bottom: 4px;
+    font-size: 1.76vw;
+    margin-bottom: 0.5vh;
 }
 
 .blueButton {
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 0.4vw;
     background-color: #439EDA;
     border-style: outset outset inset inset;
     border-color: #4bb8f0#4bb8f0 #4bb8f0 #4bb8f0;
     border-width: 1vh;
     color: white;
-    margin-left: 20%;
-    margin-bottom: 3%;
     width: 60%;
     height: 8%;
 }
 
-#title {
-    vertical-align: text-bottom;
-    height: 100px;
-    display: inline-block;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    background: linear-gradient(180deg, #1726FF 0%, #060057 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 5.5vw;
-    font-weight: 700;
-    -webkit-text-stroke-width: 0.2vh;
-    -webkit-text-stroke-color: #71ceef;
-    filter: drop-shadow(2px 2px 2px #333);
-}
-
 #buttons-container {
-    margin-bottom: 2vh;
+    border-radius: 3.8vh;
+    border-style: solid;
+    border-color: rgb(0, 35, 100);
     background: rgb(124, 201, 219);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
     align-content: center;
     height: 81vh;
-    width: 24vw;
+    width: 22vw;
+}
 
+#galactic {
+    font-size: 1.4vw;
+}
+.blueButton:active{
+    border-style: inset inset outset outset ;
+    border-color: #4bb8f0 #4bb8f0  #4bb8f0 #4bb8f0;
 }
