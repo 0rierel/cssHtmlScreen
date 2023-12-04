@@ -3,8 +3,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Rubik', sans-serif;
-    border: solid rgb(0, 35, 100);
-    border-width: calc(0.15vw + 0.3vh);
+    border: solid rgb(0, 35, 100) calc(0.15vw + 0.3vh);
     background: rgb(174, 221, 231);
     display: flex;
     user-select: none;
@@ -20,13 +19,14 @@ html {
 
 #lastEnterd {
     font-size: calc(0.525vw + 1.05vh);
-    margin-top: 0;
+    margin: 0 0 0 0;
+
 }
 
 #topBar {
     height: 10%;
     border: solid rgb(0, 35, 100);
-    border-radius: 1.04vw;
+    border-radius: calc(0.502vw + 1.04vh);
     background: #dffcff;
     display: flex;
     justify-content: space-between;
@@ -35,11 +35,12 @@ html {
 
 .titleText {
     margin: 0.5vw;
-    /* להתייחס לגובה ולרוחב תמיד!! */
     font-size: calc(0.9vw + 1.8vh);
 }
 
 #greetingbox {
+    display: grid;
+    align-content: center;
     margin-left: 2%;
 }
 
@@ -48,57 +49,9 @@ html {
     display: flex;
 }
 
-
-/* זה לא הפתרון!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-/* @media screen and (max-device-width: 1024px) {
-    #websiteTitle {
-        font-size: 8vw !important;
-    }
-
-    .titleText {
-        font-size: 2.8vw !important;
-    }
-
-    #websiteGreeting {
-        margin-top: 1vh !important;
-        font-size: 3vw !important;
-    }
-
-    #lastEnterd {
-        font-size: 1.8vw !important;
-    }
-
-    #galactic {
-        font-size: 1.8vw !important;
-    }
-
-    img {
-        margin: 1vw !important;
-        width: 8vw !important;
-        height: 8vh !important;
-    }
-
-}
-
-@media screen and (max-device-width:425px) {
-
-    #websiteTitle {
-        font-size: 9vw !important;
-        margin-right: 2vw !important;
-    }
-
-    img {
-        margin: 1.3vh 1vh 1vh 0vh !important;
-        width: 5.5vw !important;
-        height: 3vh !important;
-    }
-
-    #topBar {
-        height: 6% !important;
-    }
-} */
-
 #websiteTitle {
+    display: flex;
+    align-items: center;
     line-height: 100%;
     background-image: linear-gradient(180deg, #3845fb 0%, #060057 100%);
     -webkit-background-clip: text;
@@ -126,8 +79,7 @@ html {
 }
 
 #items {
-    border-style: solid;
-    border-color: rgb(0, 35, 100);
+    border: rgb(0, 35, 100) solid;
     background-color: #ffffff;
     width: 54vw;
     height: 51vh;
@@ -135,8 +87,7 @@ html {
 
 #itemsbox {
     border-radius: 15%;
-    border-style: solid;
-    border-color: rgb(0, 35, 100);
+    border: solid rgb(0, 35, 100);
     width: 70vw;
     height: 81vh;
     flex-direction: column;
@@ -153,9 +104,9 @@ img {
 }
 
 #websiteGreeting {
+    margin: 0 0 0 0.5vh;
     font-weight: 500;
     font-size: calc(0.88vw + 1.76vh);
-    margin-bottom: 0.5vh;
 }
 
 .button {
@@ -165,7 +116,6 @@ img {
     height: 8%;
     padding-block: 0;
     padding-inline: 0;
-    display: inline-block;
     position: relative;
     background-color: #3e85dd;
     color: #ffffff;
@@ -176,8 +126,7 @@ img {
 
 #sidebar {
     border-radius: calc(0.95vw + 1.9vh);
-    border-style: solid;
-    border-color: rgb(0, 35, 100);
+    border: solid rgb(0, 35, 100);
     background: rgb(124, 201, 219);
     display: flex;
     flex-direction: column;
@@ -195,9 +144,11 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 3.5vh;
-    border-radius: calc(0.75vw + 1.5vh) calc(0.75vw + 1.5vh) calc(0.325vw + 0.65vh) calc(0.325vw + 0.65vh);
-    background: linear-gradient(hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.8));
+    top: 0;
+    height: 3vh;
+    border-radius:calc(0.325vw + 0.65vh) calc(0.325vw + 0.65vh) calc(0.75vw + 1.5vh) calc(0.75vw + 1.5vh) ;
+    background: linear-gradient(
+        hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) );
 }
 
 
@@ -205,11 +156,11 @@ img {
 .button:hover {
     transform: scale(1.05);
     box-shadow:
-        -12px 12px 5px hsla(0, 0%, 0%, 0.15),
-        10px 25px 10px hsla(0, 0%, 0%, 0.2);
+        -1vw 2.4vh calc(0.125vw + 0.25vh) hsla(0, 0%, 0%, 0.15);
 }
 
 .button:active {
     transform: scale(0.95);
     box-shadow: none;
 }
+
