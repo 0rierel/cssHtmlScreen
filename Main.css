@@ -79,6 +79,7 @@ html {
 }
 
 #items {
+    display: grid;
     border: rgb(0, 35, 100) solid;
     background-color: #ffffff;
     width: 54vw;
@@ -120,7 +121,7 @@ img {
     background-color: #3e85dd;
     color: #ffffff;
     border: none;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: scale 0.5s, box-shadow 0.1s;
     border-radius: calc(0.25vw + 0.5vh);
 }
 
@@ -146,9 +147,8 @@ img {
     bottom: 0;
     top: 0;
     height: 3vh;
-    border-radius:calc(0.325vw + 0.65vh) calc(0.325vw + 0.65vh) calc(0.75vw + 1.5vh) calc(0.75vw + 1.5vh) ;
-    background: linear-gradient(
-        hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) );
+    border-radius: calc(0.325vw + 0.65vh) calc(0.325vw + 0.65vh) calc(0.75vw + 1.5vh) calc(0.75vw + 1.5vh);
+    background: linear-gradient(hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
 }
 
 
@@ -159,8 +159,133 @@ img {
         -1vw 2.4vh calc(0.125vw + 0.25vh) hsla(0, 0%, 0%, 0.15);
 }
 
-.button:active {
-    transform: scale(0.95);
+.pressed {
+    transform: scale(0.9);
     box-shadow: none;
 }
 
+#clockBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 16vw;
+}
+
+#clock {
+    display: flex;
+    align-items: center;
+    font-size: calc(0.8vw + 1.6vh);
+    background-color: #ffffcc;
+    box-shadow: -0.2vh 0.1vw calc(0.025vw + 0.05vh) calc(-0.5vw - -1vh) rgba(0, 0, 0, 0.75);
+}
+
+#clockButton {
+    cursor: pointer;
+    font-family: inherit;
+    width: 7vw;
+    height: 5vh;
+    margin: 0;
+    padding: 0;
+    border-width: calc(0.05vw + 0.1vh);
+    /* box-shadow: -0.2vh 0.1vw calc(0.2vw + 0.4vh) calc(-0.5vw - -1vh) rgba(0, 0, 0, 0.75); */
+    background: linear-gradient(180deg, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%);
+}
+
+#multiChoiceButton {
+    position: absolute;
+    left: 13vw;
+    top: 20vh;
+    width: 6vw;
+    cursor: pointer;
+    padding: 0;
+    border-color: rgb(0, 10, 28);
+    background-color: #4b79ad;
+    font-size: calc(0.6vw + 1.2vh);
+    color: #ffffff;
+    margin: 0;
+    border-width: calc(0.05vw + 0.1vh);
+    justify-self: end;
+
+
+
+}
+
+.multiChoiceButtonPressed {
+    background-color: #fff !important;
+    color: rgb(0, 10, 28) !important;
+    box-shadow: -0.25vw 0.5vh calc(0.35vw + 0.7vh) calc(0.075vw + 0.15vh) rgba(0, 0, 0, 0.76);
+
+}
+
+#itemsTable {
+
+    border-spacing: calc(0.05vw + 0.1vh);
+    text-align: start;
+    top: 28vh;
+    position: absolute;
+    width: 48.5vw;
+    left: 14vw;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.headerCell {
+    background-color: #060057;
+    text-align: start;
+    color: #ffffff;
+    font-size: calc(0.5vw + 1vh);
+    height: 6vh;
+    padding-right: 0.5vw;
+}
+
+.detailsTextBox {
+    font-size: calc(0.5vw + 1vh);
+    height: 3vh;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+.bodyRow {
+    background-color: #bdbdbd;
+}
+
+.bodyRow:hover {
+    background-color: #71ceef;
+
+}
+
+.activeRow {
+    background-color: #71ceef !important;
+}
+
+.lastSelectedRow {
+    background-color: #8aef71!important;
+}
+.bodyCell {
+    font-size: calc(0.5vw + 1vh);
+    height: 6vh;
+
+    padding: 0 0.5vw 0 0 ;
+}
+
+.rowHovered {
+    background-color: #71ceef;
+}
+
+.rowClicked {
+    background-color: #71ceef;
+}
+
+#itemsText {
+    height: 3vh;
+}
+ .detailsText{
+width: 20vw;
+
+ }

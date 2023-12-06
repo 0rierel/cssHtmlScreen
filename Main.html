@@ -4,26 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>חזרה לעתיד</title>
+    <title>חזרה לעתיד</title>
     <link rel="stylesheet" href="./Main.css">
 </head>
 
 <body>
     <div id="topBar">
         <div id="titleBox">
-        <img src="./resource/ict10.png"  id="ictPng">
-        <img src="./resource/flight-removebg-preview.png" >
-        <div id="websiteTitle" >
-            בחזרה לעתיד
+            <img src="./resource/ict10.png" id="ictPng">
+            <img src="./resource/flight-removebg-preview.png">
+            <div id="websiteTitle">
+                בחזרה לעתיד
+            </div>
+
         </div>
         <div id="clockBox">
-<button id="clockButton">
-  הפעל  
-</button>
-<div>
+            <button id="clockButton" class="titleText">
+                הפעל
+            </button>
+            <div id="clock">
 
-</div>
-        </div>
+            </div>
         </div>
         <div id="greetingbox">
             <h1 id="websiteGreeting">שלום פלוני אלמוני</h1>
@@ -32,13 +33,13 @@
             </p>
         </div>
     </div>
-   
+
     <div id="contentbox">
         <div id="sidebar">
             <button class="button titleText">
                 חייזרים
             </button>
-            <button class="button titleText">
+            <button class="button titleText" id="youngs">
                 צעירים
             </button>
             <button class="button titleText">
@@ -47,17 +48,32 @@
             <button class="button titleText">
                 מלחמה
             </button>
-            <button class="button titleText" >מרחב גלקטי</button>
+            <button class="button titleText">מרחב גלקטי</button>
         </div>
         <div id="itemsbox">
             <div id="items">
-                <h1 class="titleText">כל הפריטים:</h1>
+                <h1 class="titleText" id="itemsText">כל הפריטים:</h1>
+                <button id="multiChoiceButton" class="hidden">+</button>
+                <table class="hidden" id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th class="headerCell">מספר צעיר</th>
+                            <th class="headerCell">שם הצעיר</th>
+                            <th class="headerCell">מיקום מגורים</th>
+                            <th class="headerCell">טלפון</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTableBody">
+                    </tbody>
+                </table>
             </div>
             <div id="details">
                 <h1 class="titleText">פריטים ספציפיים:</h1>
             </div>
         </div>
-       
     </div>
 </body>
+
+<script src="./Main.js"></script>
+
 </html>
