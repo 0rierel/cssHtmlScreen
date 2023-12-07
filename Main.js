@@ -67,22 +67,22 @@ const createRow = (youngster, table) => {
         className: "bodyRow"
     });
     let tdNumber = Object.assign(document.createElement("td"), {
-        className: `bodyCell`,
+        className: `bodyCell number`,
         textContent: youngster.number
     })
     tr.appendChild(tdNumber)
     let tdName = Object.assign(document.createElement("td"), {
-        className: `bodyCell`,
+        className: `bodyCell name`,
         textContent: youngster.name
     })
     tr.appendChild(tdName)
     let tdResidance = Object.assign(document.createElement("td"), {
-        className: `bodyCell`,
+        className: `bodyCell residance`,
         textContent: youngster.residance
     })
     tr.appendChild(tdResidance)
     let tdPhone = Object.assign(document.createElement("td"), {
-        className: `bodyCell`,
+        className: `bodyCell phoneNumber`,
         textContent: youngster.phoneNumber
     })
     tr.appendChild(tdPhone)
@@ -139,10 +139,10 @@ const showDetails = (index) => {
     details.appendChild(textBox)
 }
 
-const showTable = () => {
+const showTable = (arrayToShow) => {
     document.getElementById("itemsTable").classList.remove("hidden")
     let table = document.getElementById("itemsTableBody")
-    youngsterList.forEach((youngster) => {
+    arrayToShow.forEach((youngster) => {
         createRow(youngster, table)
     });
     document.getElementById("multiChoiceButton").classList.remove("hidden")
@@ -155,11 +155,14 @@ const showTable = () => {
 
 }
 
-const removeDetailstextBox = () => {
+const removeDetailstextBox = (skip) => {
     let textBoxs = document.querySelectorAll(".detailsTextBox")
-   textBoxs.forEach((box)=>{
-    box.remove()
-   })
+    for (let i = 0; i < textBoxs.length; i++) {
+        if (i != skip) {
+            textBoxs[i].remove()
+        }
+
+    }
 }
 
 const removeMultiChoice = () => {
@@ -167,28 +170,18 @@ const removeMultiChoice = () => {
     for (let index = 0; index < activeRows.length; index++) {
         activeRows[index].classList.remove("activeRow");
     }
-
     let lastSelectedRow = document.getElementsByClassName("lastSelectedRow");
-    let detailsTextBox = document.getElementsByClassName("detailsTextBox")
-    console.log(detailsTextBox);
-    let rowToDelete = detailsTextBox.length;
-    console.log(rowToDelete);
+    let rowToskip = null;
     if (lastSelectedRow.length > 0) {
         lastSelectedRow[0].classList.add("activeRow");
         lastSelectedRow[0].classList.remove("lastSelectedRow");
-        rowToDelete = lastSelectedRow.length - 1;
+        rowToskip = activeRows.length - 1;
     }
-    console.log(detailsTextBox[0]);
-    removeDetailstextBox()
-    // for (let index = 0; index < rowToDelete; index++) {
-    //     detailsTextBox[index].remove()
-    // }
-
-
+    removeDetailstextBox(rowToskip)
 }
 
 
-const hideTable = () => {
+const hideTable = (dontHideText) => {
     multiChoice = false;
     document.getElementById("multiChoiceButton").classList.remove("multiChoiceButtonPressed");
     selectedRows = [];
@@ -197,8 +190,89 @@ const hideTable = () => {
     while (table.firstChild) {
         table.removeChild(table.firstChild);
     }
-    removeDetailstextBox()
-        document.getElementById("multiChoiceButton").classList.add("hidden");
+    document.getElementById("multiChoiceButton").classList.add("hidden");
+}
+
+
+const clearTable = (table) => {
+    let rowCount = table.rows.length;
+    for (let i = rowCount - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }
+}
+
+const organizeTable = (table, sortBy, asc) => {
+    let rows = Array.from(table.rows);
+
+    rows.sort((a, b) => {
+        let aValue = a.cells[getColumnIndex(a, sortBy)].textContent.trim();
+        let bValue = b.cells[getColumnIndex(b, sortBy)].textContent.trim();
+
+        if (asc) {
+            return aValue.localeCompare(bValue);
+        } else {
+            return bValue.localeCompare(aValue);
+        }
+    });
+    clearTable(table);
+    rows.forEach((row) => {
+        table.appendChild(row);
+    });
+}
+
+const getColumnIndex = (row, columnName) => {
+    let cells = Array.from(row.cells);
+    for (let i = 0; i < cells.length; i++) {
+        if (cells[i].classList.contains(columnName)) {
+            return i;
+        }
+    }
+    console.error('Column not found:', columnName);
+    return -1;
+}
+
+let currentOrginization = null;
+const reorderTable = (columnName) => {
+
+    if (currentOrginization == columnName) {
+        currentOrginization = null;
+        organizeTable(document.getElementById("itemsTableBody"), columnName, false);
+    } else {
+        currentOrginization = columnName;
+        organizeTable(document.getElementById("itemsTableBody"), columnName, true);
+    }
+
+}
+
+const showArrows = (column) => {
+    document.getElementById("arrowsHolder") ? document.getElementById("arrowsHolder").remove() : ""
+    let arrowsHolder = Object.assign(document.createElement("div"), {
+        className: "arrowsHolder"
+    })
+    let arrowUp = Object.assign(document.createElement("div"), {
+        className: "arrowUp",
+    })
+    let arrowDown = Object.assign(document.createElement("div"), {
+        className: "arrowDown",
+    })
+    arrowsHolder.replaceChildren(...[arrowUp, arrowDown]);
+    column.appendChild(arrowsHolder);
+}
+let counter = 0;
+const handleArrowClick = (target) => {
+    if (counter > 3) {
+        console.error("couldnt find order type")
+        return -1;
+    } else if (target.classList.toString().toLowerCase().includes("arrow")) {
+        counter++;
+        target = handleArrowClick(target.parentElement);
+        return target;
+    } else {
+        counter = 0;
+        return target;
+    }
+
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -207,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
         keepTimeUpdated()
     });
     document.getElementById("youngs").addEventListener("click", () => {
-        document.getElementById("itemsTable").classList.contains("hidden") ? showTable() : hideTable();
+        document.getElementById("itemsTable").classList.contains("hidden") ? showTable(youngsterList) : hideTable();
     })
     let optionsButtons = document.getElementsByClassName("button");
     for (let i = 0; i < optionsButtons.length; i++) {
@@ -225,5 +299,12 @@ document.addEventListener("DOMContentLoaded", () => {
             removeMultiChoice();
 
         }
+    });
+    Array.from(document.getElementsByClassName("headerCell")).forEach((cell) => {
+        cell.addEventListener("click", () => {
+            let column = handleArrowClick(event.target);
+            reorderTable(column.id);
+            showArrows(column);
+        });
     });
 });
