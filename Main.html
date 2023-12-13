@@ -1,77 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>חזרה לעתיד</title>
-    <link rel="stylesheet" href="./Main.css">
-</head>
+    <link rel="stylesheet" href="./Main.css" />
+  </head>
 
-<body>
+  <body>
     <div id="topBar">
-        <div id="titleBox">
-            <img src="./resource/ict10.png" id="ictPng" class="headlinePic">
-            <img src="./resource/flight-removebg-preview.png" class="headlinePic">
-            <div id="websiteTitle">
-                בחזרה לעתיד
-            </div>
-
-        </div>
-        <div id="clockBox">
-            <button id="clockButton" class="titleText">
-                הפעל
-            </button>
-            <div id="clock"> </div>
-        </div>
-        <div id="greetingbox">
-            <h1 id="websiteGreeting">שלום פלוני אלמוני</h1>
-            <p id="lastEnterd">
-                הכניסה האחרונה שלך 11:00
-            </p>
-        </div>
+      <div id="titleBox">
+        <img src="./resources/ict10.png" id="ictPng" class="headlinePic" />
+        <img src="./resources/flight-removebg-preview.png" class="headlinePic" />
+        <div id="websiteTitle">בחזרה לעתיד</div>
+      </div>
+      <div id="clockBox">
+        <button id="clockButton" class="titleText">הפעל</button>
+        <div id="clock"></div>
+      </div>
+      <div id="greetingbox">
+        <h1 id="websiteGreeting">שלום פלוני אלמוני</h1>
+        <p id="lastEnterd">הכניסה האחרונה שלך 11:00</p>
+      </div>
     </div>
 
     <div id="contentbox">
-        <div id="sidebar">
-            <button class="button titleText" id="aliens">
-                חייזרים
-            </button>
-            <button class="button titleText" id="youngs">
-                צעירים
-            </button>
-            <button class="button titleText" id="management">
-                ניהול
-            </button>
-            <button class="button titleText" id="cat">
-                מלחמה
-            </button>
-            <button class="button titleText">מרחב גלקטי</button>
+      <div id="sidebar">
+        <button class="button titleText" id="aliens">חייזרים</button>
+        <button class="button titleText" id="youngs">צעירים</button>
+        <button class="button titleText" id="management">ניהול</button>
+        <button class="button titleText" id="catWar">מלחמה</button>
+        <button class="button titleText" id="space">מרחב גלקטי</button>
+      </div>
+      <div id="itemsbox">
+        <div id="items">
+          <h1 class="titleText" id="itemsText">כל הפריטים:</h1>
+          <button id="multiChoiceButton" class="hidden">+</button>
+          <table class="hidden" id="itemsTable">
+            <thead>
+              <tr class="headRow">
+                <th class="headerCell" id="number">מספר צעיר</th>
+                <th class="headerCell" id="name">שם הצעיר</th>
+                <th class="headerCell" id="residance">מיקום מגורים</th>
+                <th class="headerCell" id="phoneNumber">טלפון</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody"></tbody>
+          </table>
         </div>
-        <div id="itemsbox">
-            <div id="items">
-                <h1 class="titleText" id="itemsText">כל הפריטים:</h1>
-                <button id="multiChoiceButton" class="hidden">+</button>
-                <table class="hidden" id="itemsTable">
-                    <thead>
-                        <tr class="headRow">
-                            <th class="headerCell" id="number">מספר צעיר</th>
-                            <th class="headerCell" id="name">שם הצעיר</th>
-                            <th class="headerCell" id="residance">מיקום מגורים</th>
-                            <th class="headerCell" id="phoneNumber">טלפון</th>
-                        </tr>
-                    </thead>
-                    <tbody id="itemsTableBody">
-                    </tbody>
-                </table>
-            </div>
-            <div id="details">
-                <h1 class="titleText">פריטים ספציפיים:</h1>
-            </div>
+        <div id="details">
+          <h1 class="titleText">פריטים ספציפיים:</h1>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 
-<script src="./Main.js"></script>
-
+  <script src="./Main.js"></script>
 </html>
