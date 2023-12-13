@@ -1,5 +1,45 @@
+const fixStringLength = (array) => {
+    array.forEach(element => {
+        if (element.name.length > 20) {
+            element.name = element.name.substring(0, 20) + "...";
+        }
+        if (element.phoneNumber.length > 12) {
+            element.phoneNumber = element.phoneNumber.substring(0, 12) + "...";
+        }
+        if (element.residance.length > 15) {
+            element.residance = element.residance.substring(0, 15) + "...";
+        }
+        if (element.specificDetails.length > 15) {
+            element.specificDetails.hobie = element.specificDetails.hobie.substring(0, 15) + "...";
+        }
+        if (element.specificDetails.book.length > 15) {
+            element.specificDetails.book = element.specificDetails.book.substring(0, 15) + "...";
+        }
+    });
+}
+
+
+const getyoungsters = async () => {
+    try {
+        const response = await fetch('http://127.0.0.1:5500/cssHtmlScreen/youngsters.json');
+        if (!response.ok) {
+            throw new Error('Failed to fetch data.json');
+        }
+        const data = await response.json();
+        fixStringLength(data);
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+
+
+
+
 const updateTime = () => {
-    let clock = document.getElementById("clock");
+    const clock = document.getElementById("clock");
     clock.textContent = new Date().toLocaleTimeString();
 }
 
@@ -8,12 +48,12 @@ let runningId;
 const keepTimeUpdated = () => {
     if (runningId != undefined) {
         clearInterval(runningId);
-        event.target.innerText = 'הפעל'
+        event.target.textContent = 'הפעל';
         runningId = undefined;
     } else {
         updateTime();
         runningId = setInterval(updateTime, 1000);
-        event.target.innerText = 'עצור'
+        event.target.textContent = 'עצור';
     }
 }
 
@@ -28,38 +68,7 @@ const keepPressed = (optionsButtons) => {
     }
 }
 
-let youngsterList = [{
-        name: 'חבר פרבר',
-        number: 1,
-        phoneNumber: '058-5678444',
-        residance: 'פני חבר',
-        specificDetails: {
-            hobie: 'בילויים',
 
-            book: 'חדוו"א 1'
-        }
-    },
-    {
-        name: 'עדי שטיינר',
-        number: 46,
-        phoneNumber: '051-1234567',
-        residance: 'להבים',
-        specificDetails: {
-            hobie: 'בילויים',
-            book: 'חדוו"א 2'
-        }
-    },
-    {
-        name: 'סאני סימן טוב',
-        number: 99,
-        phoneNumber: '012-1234567',
-        residance: 'חולון',
-        specificDetails: {
-            hobie: 'בילויים',
-            book: 'חדוו"א 3'
-        }
-    }
-]
 
 
 const createRow = (youngster, table) => {
@@ -91,14 +100,14 @@ const createRow = (youngster, table) => {
 
 let multiChoice = false;
 let selectedRows = [];
-const choseRow = (index, bodyRows) => {
+const choseRow = (index, bodyRows, youngsterList) => {
     if (!multiChoice) {
         for (let j = 0; j < bodyRows.length; j++) {
             bodyRows[j].classList.remove("activeRow");
         }
         bodyRows[index].classList.add("activeRow");
         selectedRows = [bodyRows[index]]
-        showDetails(index)
+        showDetails(index, youngsterList)
     } else if (!bodyRows[index].classList.contains("activeRow") && !bodyRows[index].classList.contains("lastSelectedRow")) {
         selectedRows.push(bodyRows[index])
         bodyRows[index].classList.add("lastSelectedRow");
@@ -106,11 +115,11 @@ const choseRow = (index, bodyRows) => {
             selectedRows[selectedRows.length - 2].classList.remove("lastSelectedRow");
             selectedRows[selectedRows.length - 2].classList.add("activeRow");
         }
-        showDetails(index)
+        showDetails(index, youngsterList)
     }
 }
 
-const showDetails = (index) => {
+const showDetails = (index, youngsterList) => {
     let youngster = youngsterList[index];
     let name = Object.assign(document.createElement("h1"), {
         textContent: `שם: ${youngster.name}`,
@@ -139,20 +148,25 @@ const showDetails = (index) => {
     details.appendChild(textBox)
 }
 
-const showTable = (arrayToShow) => {
+const showTable = () => {
     document.getElementById("itemsTable").classList.remove("hidden")
+    document.getElementById("multiChoiceButton").classList.remove("hidden")
+    let textBoxs = document.querySelectorAll(".detailsTextBox")
+    for (let i = 0; i < textBoxs.length; i++) {
+        textBoxs[i].classList.add("hidden")
+    }
+}
+const constractTable = (arrayToShow) => {
     let table = document.getElementById("itemsTableBody")
     arrayToShow.forEach((youngster) => {
         createRow(youngster, table)
     });
-    document.getElementById("multiChoiceButton").classList.remove("hidden")
     let bodyRows = document.getElementsByClassName("bodyRow")
     for (let i = 0; i < bodyRows.length; i++) {
         bodyRows[i].addEventListener("click", () => {
-            choseRow(i, bodyRows);
+            choseRow(i, bodyRows, arrayToShow);
         });
     }
-
 }
 
 const removeDetailstextBox = (skip) => {
@@ -167,12 +181,15 @@ const removeDetailstextBox = (skip) => {
 
 const removeMultiChoice = () => {
     let activeRows = document.getElementsByClassName("activeRow")
-    for (let index = 0; index < activeRows.length; index++) {
-        activeRows[index].classList.remove("activeRow");
+    while (activeRows.length > 0) {
+        activeRows[0].classList.remove("activeRow");
     }
     let lastSelectedRow = document.getElementsByClassName("lastSelectedRow");
     let rowToskip = null;
-    if (lastSelectedRow.length > 0) {
+    if (lastSelectedRow.length <= 0) {
+        selectedRows = []
+    } else {
+        selectedRows = [lastSelectedRow[0]];
         lastSelectedRow[0].classList.add("activeRow");
         lastSelectedRow[0].classList.remove("lastSelectedRow");
         rowToskip = activeRows.length - 1;
@@ -181,22 +198,18 @@ const removeMultiChoice = () => {
 }
 
 
-const hideTable = (dontHideText) => {
-    multiChoice = false;
-    document.getElementById("multiChoiceButton").classList.remove("multiChoiceButtonPressed");
-    selectedRows = [];
+const hideTable = () => {
     document.getElementById("itemsTable").classList.add("hidden")
-    let table = document.getElementById("itemsTableBody")
-    while (table.firstChild) {
-        table.removeChild(table.firstChild);
-    }
     document.getElementById("multiChoiceButton").classList.add("hidden");
+    let textBoxs = document.querySelectorAll(".detailsTextBox")
+    for (let i = 0; i < textBoxs.length; i++) {
+        textBoxs[i].classList.add("hidden")
+    }
 }
 
 
 const clearTable = (table) => {
-    let rowCount = table.rows.length;
-    for (let i = rowCount - 1; i > 0; i--) {
+    for (let i = table.rows.length - 1; i > 0; i--) {
         table.deleteRow(i);
     }
 }
@@ -245,25 +258,25 @@ const reorderTable = (columnName) => {
 }
 
 const showArrows = (column) => {
-    document.getElementById("arrowsHolder") ? document.getElementById("arrowsHolder").remove() : ""
-    let arrowsHolder = Object.assign(document.createElement("div"), {
-        className: "arrowsHolder"
+    document.getElementsByClassName("sortingBox")[0] ? document.getElementsByClassName("sortingBox")[0].remove() : ""
+    let sortingBox = Object.assign(document.createElement("div"), {
+        className: "sortingBox"
     })
-    let arrowUp = Object.assign(document.createElement("div"), {
-        className: "arrowUp",
+    let sortUp = Object.assign(document.createElement("div"), {
+        className: "sortUp",
     })
-    let arrowDown = Object.assign(document.createElement("div"), {
-        className: "arrowDown",
+    let sortDown = Object.assign(document.createElement("div"), {
+        className: "sortDown",
     })
-    arrowsHolder.replaceChildren(...[arrowUp, arrowDown]);
-    column.appendChild(arrowsHolder);
+    sortingBox.replaceChildren(...[sortUp, sortDown]);
+    column.appendChild(sortingBox);
 }
 let counter = 0;
 const handleArrowClick = (target) => {
     if (counter > 3) {
         console.error("couldnt find order type")
         return -1;
-    } else if (target.classList.toString().toLowerCase().includes("arrow")) {
+    } else if (target.classList.toString().toLowerCase().includes("sort")) {
         counter++;
         target = handleArrowClick(target.parentElement);
         return target;
@@ -271,17 +284,17 @@ const handleArrowClick = (target) => {
         counter = 0;
         return target;
     }
-
-
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = async () => {
+    youngsterList = await getyoungsters();
+    constractTable(youngsterList)
     updateTime();
     document.getElementById("clockButton").addEventListener("click", () => {
         keepTimeUpdated()
     });
     document.getElementById("youngs").addEventListener("click", () => {
-        document.getElementById("itemsTable").classList.contains("hidden") ? showTable(youngsterList) : hideTable();
+        document.getElementById("itemsTable").classList.contains("hidden") ? showTable() : hideTable();
     })
     let optionsButtons = document.getElementsByClassName("button");
     for (let i = 0; i < optionsButtons.length; i++) {
@@ -307,4 +320,5 @@ document.addEventListener("DOMContentLoaded", () => {
             showArrows(column);
         });
     });
-});
+    document.getElementById("")
+};

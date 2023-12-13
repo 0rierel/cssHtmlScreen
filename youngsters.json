@@ -1,0 +1,32 @@
+[
+    {
+        "name": "חבר פרבר",
+        "number": 1,
+        "phoneNumber": "058-5678444",
+        "residance": "פני חבר",
+        "specificDetails": {
+            "hobie": "בילויים",
+            "book": "חדוו\"א 1"
+        }
+    },
+    {
+        "name": "עדי שטיינר",
+        "number": 46,
+        "phoneNumber": "051-1234567",
+        "residance": "להבים",
+        "specificDetails": {
+            "hobie": "בילויים",
+            "book": "חדוו\"א 2"
+        }
+    },
+    {
+        "name": "סאני סימן טוב",
+        "number": 99,
+        "phoneNumber": "012-1234567",
+        "residance": "חולון",
+        "specificDetails": {
+            "hobie": "בילויים",
+            "book": "חדוו\"א 3"
+        }
+    }
+]
